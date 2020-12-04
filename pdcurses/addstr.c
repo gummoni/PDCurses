@@ -82,6 +82,13 @@ int waddnstr(WINDOW *win, const char *str, int n)
             return OK;
 
         i += retval;
+
+        if (1 < retval) {
+            if (waddch(win, wch) == ERR)
+                return ERR;
+            wch = ' ';
+        }
+
 #else
         chtype wch = (unsigned char)(str[i++]);
 #endif
